@@ -48,7 +48,7 @@ public class Almacen {
 			throw new RuntimeException("la edad minima de vacunacion es 18 años");
 
 		// si entra una persona mayor de 60
-		if (edad >= 60) {
+		if (edad > 60) {
 			// intento dar pfizer
 			if (hayVacuna("Pfizer")) {
 				return this.vacunasDisponibles.get("Pfizer").remove(0);
@@ -57,7 +57,7 @@ public class Almacen {
 			if (hayVacuna("Sputnik"))
 				return this.vacunasDisponibles.get("Sputnik").remove(0);
 		}
-		// si no hay ninguna intento el resto
+		// si no hay ninguna o si la edad es menor a 60 intento el resto
 
 		if (hayVacuna("Moderna"))
 			return this.vacunasDisponibles.get("Moderna").remove(0);
@@ -153,28 +153,20 @@ public class Almacen {
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
-		builder.append("Almacen [vacunasDisponibles=");
-		builder.append(vacunasDisponibles);
-		builder.append(",  vacunasVencidas=");
-		builder.append(vacunasVencidas);
-		builder.append("]");
+		builder.append("--------------------------------------------- \nAlmacen \n");
+		builder.append("\nVacunas Disponibles: \n");
+		for (String key : this.vacunasDisponibles.keySet()) {
+			builder.append(key + " Cantidad de vacunas disponibles : " + this.vacunasDisponibles.get(key).size() + "\n");
+		}
+		builder.append("\nVacunas Vencidas: \n");
+		for (String key : this.vacunasVencidas.keySet()) {
+			builder.append(key + " Cantidad de vacunas vencidas : " + this.vacunasVencidas.get(key) + "\n");
+		}
+		
+		
 		return builder.toString();
 	}
 
-	public static void main(String[] args) {
-		Almacen alma = new Almacen();
-		alma.agregarVacunas("Pfizer", 1, Fecha.hoy());
-//		alma.agregarVacunas("Moderna", 1, Fecha.hoy());
-//		alma.agregarVacunas("Astrazeneca", 1, Fecha.hoy());
-//		alma.agregarVacunas("Sputnik", 1, Fecha.hoy());
-//		alma.agregarVacunas("Sinopharm", 1, Fecha.hoy());
-
-		System.out.println(alma);
-		alma.dameVacuna(18);
-		System.out.println(alma);
-
-		
-	}
 	
 	
 }
