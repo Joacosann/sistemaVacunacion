@@ -127,7 +127,7 @@ public class Almacen {
 		StringBuilder builder = new StringBuilder();
 		builder.append("Almacen [vacunasDisponibles=");
 		builder.append(vacunasDisponibles);
-		builder.append(", vacunasVencidas=");
+		builder.append(",  vacunasVencidas=");
 		builder.append(vacunasVencidas);
 		builder.append("]");
 		return builder.toString();
