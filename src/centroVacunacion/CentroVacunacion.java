@@ -5,6 +5,10 @@ import java.util.Map;
 
 public class CentroVacunacion {
 
+	//valores
+	
+		private Almacen almacen = new Almacen();
+	
 	/**
 	* Constructor.
 	* recibe el nombre del centro y la capacidad de vacunación diaria.
@@ -141,7 +145,7 @@ public class CentroVacunacion {
 	* - valor: cantidad de vacunas vencidas conocidas hasta el momento.
 	*/
 	public Map<String, Integer> reporteVacunasVencidas() {
-		return null;
+		return almacen.getVacunasVencidas();
 	}
 	
 	
