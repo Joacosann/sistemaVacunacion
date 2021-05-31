@@ -2,9 +2,18 @@ package centroVacunacion;
 
 public class Sputnik extends Vacuna {
 
-	Sputnik(String edad, int temperatura) {
-		super(edad, temperatura);
+	
+	Sputnik() {
+		super("mayores de 60",3);
 		
 	}
 
+	@Override
+	public boolean estaVencida() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+
+	
 }
