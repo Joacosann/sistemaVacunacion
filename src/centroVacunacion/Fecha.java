@@ -105,6 +105,21 @@ public class Fecha implements Comparable<Fecha> {
 	public int hashCode() {
 		return fecha == null ? 0 : fecha.hashCode();
 	}
+
+	@Override
+	public String toString() {
+		StringBuilder builder = new StringBuilder();
+		builder.append("[");
+		builder.append(dia());
+		builder.append("-");
+		builder.append(mes());
+		builder.append("-");
+		builder.append(anio());
+		builder.append("]");
+		return builder.toString();
+	}
+	
+	
 	
 	
 

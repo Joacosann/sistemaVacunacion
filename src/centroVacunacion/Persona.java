@@ -19,7 +19,7 @@ public class Persona implements Comparable {
 		Fecha fechaActual = Fecha.hoy();
 		
 		int edad = fechaActual.anio() - getNacimiento().anio();
-		if((fechaActual.mes() < nacimiento.mes()) || (fechaActual.mes() == nacimiento.mes() && fechaActual.dia() < nacimiento.dia()))
+		if((fechaActual.mes() < nacimiento.mes()) || (fechaActual.mes() == nacimiento.mes() && fechaActual.dia() > nacimiento.dia()))
 			edad = edad - 1;
 		
 		
@@ -83,7 +83,7 @@ public class Persona implements Comparable {
 	}
 	
 	public static void main(String[] args) {
-		Persona pepe = new Persona(42948062, new Fecha(30, 5, 2000), false, false);
+		Persona pepe = new Persona(42948062, new Fecha(31, 5, 2000), false, false);
 		System.out.println(pepe.getEdad());
 		
 		
