@@ -11,7 +11,7 @@ public class Astrazeneca extends Vacuna {
 	public boolean estaVencida() {
 		// TODO Auto-generated method stub
 		return false;
-		
+	
 	}
 
 }
