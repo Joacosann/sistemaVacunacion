@@ -28,6 +28,20 @@ public abstract class Vacuna  {
 		this.temperatura = temperatura;
 	}
 	
+	abstract public boolean estaVencida();
+
+
+	@Override
+	public String toString() {
+		StringBuilder builder = new StringBuilder();
+		builder.append("Vacuna [edadPreferente=");
+		builder.append(edadPreferente);
+		builder.append(", temperatura=");
+		builder.append(temperatura);
+		builder.append("]");
+		return builder.toString();
+	}
 	
 	
 }
+
