@@ -66,7 +66,7 @@ public class Almacen {
 		else if (hayVacuna("Sinopharm")) 
 			return this.vacunasDisponibles.get("Sinopharm").remove(0);
 		else {
-			throw new RuntimeException("no hay vacunas disponibles para la edad solicitada");
+			throw new RuntimeException("no  hay vacunas disponibles para la edad solicitada");
 		}
 
 	}
