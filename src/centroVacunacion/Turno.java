@@ -13,8 +13,7 @@ public class Turno {
 	}
 	
 	public String dameDni(){
-		StringBuilder dni = new StringBuilder(getPersona().getDNI());
-		return dni.toString();
+		return "" + this.persona.getDNI();
 	}
 
 	
@@ -42,5 +41,13 @@ public class Turno {
 	public void setFecha(Fecha fecha) {
 		this.fecha = fecha;
 	}
-	
+
+	public boolean esTurnoVencido() {
+		if(Fecha.hoy().compareTo(this.fecha) >0) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
 }
