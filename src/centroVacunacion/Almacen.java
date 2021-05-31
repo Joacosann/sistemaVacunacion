@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 
+import com.sun.xml.internal.bind.v2.TODO;
+
 public class Almacen {
 	
 	private HashMap <String, ArrayList<Vacuna>> vacunasDisponibles;
@@ -30,20 +32,59 @@ public class Almacen {
 		vacunasVencidas.put("Sinopharm", 0);
 	}
 	
+	/**
+	 * Devuelve una vacuna correspondiente a la edad pasada por parametro
+	 * de no haber vacunas o de ser menor de 18 años lanza una excepcion
+	 *
+	 *@param edad del paciente a vacunar
+	 */
 	public Vacuna dameVacuna(int edad) {
-		return null;
+		// TODO metodo
+		// pfizer sputnik > 60
+		// casos base
+		if (vacunasDisponibles() == 0)
+			throw new RuntimeException("no hay vacunas disponibles en el centro");
+		if (edad < 18)
+			throw new RuntimeException("la edad minima de vacunacion es 18 años");
+
+		// si entra una persona mayor de 60
+		if (edad >= 60) {
+			// intento dar pfizer
+			if (hayVacuna("Pfizer")) {
+				return this.vacunasDisponibles.get("Pfizer").remove(0);
+			}
+			// intento dar sputnik
+			if (hayVacuna("Sputnik"))
+				return this.vacunasDisponibles.get("Sputnik").remove(0);
+		}
+		// si no hay ninguna intento el resto
+
+		if (hayVacuna("Moderna"))
+			return this.vacunasDisponibles.get("Moderna").remove(0);
+		else if (hayVacuna("Astrazeneca"))
+			return this.vacunasDisponibles.get("Astrazeneca").remove(0);
+		else if (hayVacuna("Sinopharm")) 
+			return this.vacunasDisponibles.get("Sinopharm").remove(0);
+		else {
+			throw new RuntimeException("no hay vacunas disponibles para la edad solicitada");
+		}
+
 	}
 	
 	public boolean hayVacuna(String nombreVacuna) {
-		return false; 
+		return this.vacunasDisponibles.get(nombreVacuna).size() > 0; 
 	}
 	
 	public int vacunasDisponibles() {
-		return 0;
+		int contador = 0;
+		for (String nombreVacuna : this.vacunasDisponibles.keySet()) {
+			contador += this.vacunasDisponibles.get(nombreVacuna).size();
+		}
+		return contador;
 	}
 	
 	public HashMap<String, Integer> reporteVacunasVencidas(){
-		return null;
+		return this.vacunasVencidas;
 	}
 	
 	public void agregarVacunas(String nombreVacuna, int cantidad , Fecha ingreso) {
@@ -79,9 +120,6 @@ public class Almacen {
 			}
 	}
 	
-//	public void sacarVacunas(String nombreVacuna, int cantidad) {
-//		vacunasDisponibles.replace(nombreVacuna, cantidad);
-//	}
 	
 	public void moverVacunas() {
 		//por cada clave en vacuna disponible
@@ -107,17 +145,7 @@ public class Almacen {
 		return vacunasDisponibles;
 	}
 
-	public void setVacunasDisponibles(HashMap<String, ArrayList<Vacuna>> vacunasDisponibles) {
-		this.vacunasDisponibles = vacunasDisponibles;
-	}
 
-	public HashMap<String, Integer> getVacunasVencidas() {
-		return vacunasVencidas;
-	}
-
-	public void setVacunasVencidas(HashMap<String, Integer> vacunasVencidas) {
-		this.vacunasVencidas = vacunasVencidas;
-	}
 		
 	
 	
@@ -135,12 +163,17 @@ public class Almacen {
 
 	public static void main(String[] args) {
 		Almacen alma = new Almacen();
-		alma.agregarVacunas("Pfizer", 2, Fecha.hoy());
-		alma.agregarVacunas("Pfizer", 20, new Fecha(01,01,2021));
+		alma.agregarVacunas("Pfizer", 1, Fecha.hoy());
+//		alma.agregarVacunas("Moderna", 1, Fecha.hoy());
+//		alma.agregarVacunas("Astrazeneca", 1, Fecha.hoy());
+//		alma.agregarVacunas("Sputnik", 1, Fecha.hoy());
+//		alma.agregarVacunas("Sinopharm", 1, Fecha.hoy());
 
 		System.out.println(alma);
-		alma.moverVacunas();
+		alma.dameVacuna(18);
 		System.out.println(alma);
+
+		
 	}
 	
 	
