@@ -145,7 +145,7 @@ public class CentroVacunacion {
 	* - valor: cantidad de vacunas vencidas conocidas hasta el momento.
 	*/
 	public Map<String, Integer> reporteVacunasVencidas() {
-		return almacen.getVacunasVencidas();
+		return almacen.reporteVacunasVencidas();
 	}
 	
 	
