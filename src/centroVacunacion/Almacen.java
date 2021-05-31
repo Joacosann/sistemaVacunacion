@@ -35,7 +35,7 @@ public class Almacen {
 	}
 	
 	public boolean hayVacuna(String nombreVacuna) {
-		return false;
+		return false; 
 	}
 	
 	public int vacunasDisponibles() {
