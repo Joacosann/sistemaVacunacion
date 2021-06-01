@@ -6,9 +6,16 @@ import java.util.Map;
 public class CentroVacunacion {
 
 	//valores
-	
+		private String nombreDelCentro;
+		private int capacidadVacunacionDiaria;
 		private Almacen almacen = new Almacen();
-	
+	/*
+	 * IREP
+	 * la capacidadVacunacionDiaria debe ser un entero mayor a 0
+	 * 
+	 */
+		
+		
 	/**
 	* Constructor.
 	* recibe el nombre del centro y la capacidad de vacunación diaria.
@@ -16,6 +23,7 @@ public class CentroVacunacion {
 	* Si el nombre no está definido, se debe generar una excepción.
 	*/
 	public CentroVacunacion(String nombreCentro, int capacidadVacunacionDiaria) {
+		
 	}
 	
 	
