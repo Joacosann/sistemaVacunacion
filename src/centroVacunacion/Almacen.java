@@ -153,7 +153,7 @@ public class Almacen {
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
-		builder.append("--------------------------------------------- \nAlmacen \n");
+		builder.append("---------------------------------------------- \nAlmacen \n");
 		builder.append("\nVacunas Disponibles: \n");
 		for (String key : this.vacunasDisponibles.keySet()) {
 			builder.append(key + " Cantidad de vacunas disponibles : " + this.vacunasDisponibles.get(key).size() + "\n");
