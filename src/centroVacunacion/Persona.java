@@ -1,6 +1,6 @@
 package centroVacunacion;
 
-public class Persona implements Comparable {
+public class Persona implements Comparable<Persona> {
 	private int DNI;
 	private Fecha nacimiento;
 	private boolean esEmpleadoSalud;
@@ -18,75 +18,69 @@ public class Persona implements Comparable {
 	public int getEdad() {
 		Fecha fechaActual = Fecha.hoy();
 		
-		int edad = fechaActual.anio() - getNacimiento().anio();
+		int edad = fechaActual.anio() - this.nacimiento.anio();
 		if((fechaActual.mes() < nacimiento.mes()) || (fechaActual.mes() == nacimiento.mes() && fechaActual.dia() > nacimiento.dia()))
 			edad = edad - 1;
-		
-		
-		
+
 		return edad;
 	}
 	
 	//CompareTo
-	public int compareTo(Persona p) {
-		// TODO Auto-generated method stub
+	@Override
+	public int compareTo(Persona persona) {
+
+		if (this.esEmpleadoSalud || persona.esEmpleadoSalud) {
+			if (this.esEmpleadoSalud && !persona.esEmpleadoSalud)
+				return 1;
+
+			else if (persona.esEmpleadoSalud && !this.esEmpleadoSalud)
+				return -1;
+		}
+		if (this.getEdad() >= 60 || persona.getEdad() >= 60) {
+			if (this.getEdad() >= 60 && persona.getEdad() < 60)
+				return 1;
+
+			else if (persona.getEdad() >= 60 && this.getEdad() < 60)
+				return -1;
+		}
+		if (this.tienePadecimientos || persona.tienePadecimientos) {
+			if (this.tienePadecimientos && !persona.tienePadecimientos)
+				return 1;
+
+			else if (persona.tienePadecimientos && !this.tienePadecimientos)
+				return -1;
+		}
 		return 0;
+		
+		
+		
+		
+			
+			
+			
 	}
 
-	//Setters y Getters
+	//getter
 	public int getDNI() {
 		return DNI;
 	}
 
 
-	public void setDNI(int dNI) {
-		DNI = dNI;
-	}
 
 
-	public Fecha getNacimiento() {
-		return nacimiento;
-	}
-
-
-	public void setNacimiento(Fecha nacimiento) {
-		this.nacimiento = nacimiento;
-	}
-
-
-	public boolean isEsEmpleadoSalud() {
-		return esEmpleadoSalud;
-	}
-
-
-	public void setEsEmpleadoSalud(boolean esEmpleadoSalud) {
-		this.esEmpleadoSalud = esEmpleadoSalud;
-	}
-
-
-	public boolean isTienePadecimientos() {
-		return tienePadecimientos;
-	}
-
-
-	public void setTienePadecimientos(boolean tienePadecimientos) {
-		this.tienePadecimientos = tienePadecimientos;
-	}
-
-
-
-
-	@Override
-	public int compareTo(Object o) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
+	
 	
 	public static void main(String[] args) {
-		Persona pepe = new Persona(42948062, new Fecha(31, 5, 2000), false, false);
+		Persona pepe = new Persona(42948062, new Fecha(31, 5, 2000), true, true);
+		Persona juan = new Persona(42948062, new Fecha(31, 5, 1930), true, true);
 		System.out.println(pepe.getEdad());
+		System.out.println(juan.getEdad());
+		System.out.println(pepe.compareTo(juan));
+		
 		
 		
 	}
+
+
 	
 }
