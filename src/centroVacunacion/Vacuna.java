@@ -29,6 +29,8 @@ public abstract class Vacuna  {
 	}
 	
 	abstract public boolean estaVencida();
+	
+	abstract public String getNombre();
 
 
 	@Override

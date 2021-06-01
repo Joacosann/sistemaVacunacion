@@ -31,5 +31,20 @@ public class Pfizer extends Vacuna {
 			return false;
 		}
 	}
+
+	@Override
+	public String toString() {
+		StringBuilder builder = new StringBuilder();
+		builder.append("Pfizer : Vence el = " + fechaVencimiento + " exclusiva para mayores de 60 años "+ " Guardar a -18º \n" );
+
+		return builder.toString();
+	}
+
+	@Override
+	public String getNombre() {
+		// TODO Auto-generated method stub
+		return "Pfizer";
+	}
+	
 	
 }

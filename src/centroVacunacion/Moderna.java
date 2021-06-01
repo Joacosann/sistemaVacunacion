@@ -45,5 +45,12 @@ public class Moderna extends Vacuna {
 			return false;
 		}
 	}
+
+
+	@Override
+	public String getNombre() {
+		// TODO Auto-generated method stub
+		return "Moderna";
+	}
 }
 
