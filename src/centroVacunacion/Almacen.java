@@ -39,7 +39,6 @@ public class Almacen {
 	 *@param edad del paciente a vacunar
 	 */
 	public Vacuna dameVacuna(int edad) {
-		// TODO metodo
 		// pfizer sputnik > 60
 		// casos base
 		if (vacunasDisponibles() == 0)
@@ -66,7 +65,7 @@ public class Almacen {
 		else if (hayVacuna("Sinopharm")) 
 			return this.vacunasDisponibles.get("Sinopharm").remove(0);
 		else {
-			throw new RuntimeException("no  hay vacunas disponibles para la edad solicitada");
+			return null;
 		}
 
 	}
@@ -82,7 +81,11 @@ public class Almacen {
 		}
 		return contador;
 	}
-	
+
+	public int vacunasDisponibles(String nombreVacuna) {
+		return this.vacunasDisponibles.get(nombreVacuna).size();
+	}
+		
 	public HashMap<String, Integer> reporteVacunasVencidas(){
 		return this.vacunasVencidas;
 	}
@@ -119,7 +122,29 @@ public class Almacen {
 				break;
 			}
 	}
-	
+	public void agregarVacuna(Vacuna vacuna) {
+		String nombreVacuna = vacuna.getNombre();
+		switch (nombreVacuna) {
+		case "Sputnik":
+				vacunasDisponibles.get(nombreVacuna).add(vacuna);
+			break;
+		case "Moderna":
+				vacunasDisponibles.get(nombreVacuna).add(vacuna);
+			break;
+		case "Astrazeneca":
+				vacunasDisponibles.get(nombreVacuna).add(vacuna);
+			break;
+		case "Pfizer":
+				vacunasDisponibles.get(nombreVacuna).add(vacuna);
+			break;
+		case "Sinopharm":
+				vacunasDisponibles.get(nombreVacuna).add(vacuna);
+			break;
+
+		default:
+			break;
+		}
+	}
 	
 	public void moverVacunas() {
 		//por cada clave en vacuna disponible
@@ -153,7 +178,7 @@ public class Almacen {
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
-		builder.append("---------------------------------------------- \nAlmacen \n");
+		builder.append("\n---------------------------------------------- \nAlmacen \n");
 		builder.append("\nVacunas Disponibles: \n");
 		for (String key : this.vacunasDisponibles.keySet()) {
 			builder.append(key + " Cantidad de vacunas disponibles : " + this.vacunasDisponibles.get(key).size() + "\n");
