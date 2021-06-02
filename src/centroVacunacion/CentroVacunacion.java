@@ -147,7 +147,6 @@ public class CentroVacunacion {
 			Fecha fechaAux = fechas.next();
 			//si la fecha esta vencida
 			if(fechaAux.compareTo(Fecha.hoy())<0) {
-				System.out.println(turnos.get(fechaAux));
 				//guardo las vacunas
 				for (Turno t : turnos.get(fechaAux)) {
 					almacen.agregarVacuna(t.getVacuna());
@@ -280,8 +279,8 @@ public class CentroVacunacion {
 	private void ordenarListaDeEspera() {
         for(int i = 0; i < listaDeEspera.size()-1; i ++) {
             for(int j = 0; j < listaDeEspera.size()-1; j ++) {
-                if(listaDeEspera.get(j).compareTo(listaDeEspera.get(j + 1)) <0) {
-              
+                if(listaDeEspera.get(j).compareTo(listaDeEspera.get(j + 1)) >0) {
+               
                 	Collections.swap(listaDeEspera, j, j+1);
                 }
             }
