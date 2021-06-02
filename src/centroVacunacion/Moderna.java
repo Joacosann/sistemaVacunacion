@@ -6,6 +6,10 @@ public class Moderna extends Vacuna {
 	private Fecha fechaVencimiento;
 	private Fecha aux;
 	
+	/*IREP
+	 * fechaIngreso debe ser menor o igual a Fecha.hoy()
+	 */
+	
 	
 	Moderna(Fecha fechaIngreso) {
 		super("todas las edades", -18);

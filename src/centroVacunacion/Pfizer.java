@@ -4,6 +4,10 @@ public class Pfizer extends Vacuna {
 	private Fecha fechaVencimiento;
 	private Fecha aux;
 
+	/*IREP
+	 * fechaIngreso debe ser menor o igual a Fecha.hoy()
+	 */
+	
 	Pfizer(Fecha fechaIngreso) {
 		super("mayores de 60", -18);
 

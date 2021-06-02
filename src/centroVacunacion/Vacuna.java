@@ -5,9 +5,15 @@ public abstract class Vacuna  {
 	private String edadPreferente;
 	private int temperatura;
 	
+	/*
+	 * edadPreferente debe ser "todas las edades"  o  "mayores de 60"
+	 * dada la forma de implementacion de la herencia el irep siempre se cumple 
+	 */
+	
 	Vacuna(String edad, int temperatura){
 		this.edadPreferente = edad;
 		this.temperatura = temperatura;
+
 	}
 	
 	

@@ -9,6 +9,15 @@ public class Almacen {
 	
 	private HashMap <String, ArrayList<Vacuna>> vacunasDisponibles;
 	private HashMap <String, Integer> vacunasVencidas;
+	
+	/*
+	 * IREP
+	 * el value de todas las keys en vacunasVencidas no puede ser < 0
+	 * las keys en los diccionarios vacunasDisponibles y vacunasDisponibles solo pueden ser : 
+	 *  {Sputnik , Moderna , AstraZeneca , Sinopharm , Pfizer}
+	 */
+	
+	
 	Almacen(){
 		
 		//instanciamos las vacunas disponibles
@@ -121,7 +130,7 @@ public class Almacen {
 				break;
 			}
 	}
-	public void agregarVacuna(Vacuna vacuna) {
+	public void agregarVacunas(Vacuna vacuna) {
 		String nombreVacuna = vacuna.getNombre();
 		switch (nombreVacuna) {
 		case "Sputnik":
@@ -164,13 +173,6 @@ public class Almacen {
 		}         
 	}
 	
-	//setters y getters
-	public HashMap<String, ArrayList<Vacuna>> getVacunasDisponibles() {
-		return vacunasDisponibles;
-	}
-
-
-		
 	
 	
 	

@@ -7,7 +7,17 @@ public class Persona implements Comparable<Persona> {
 	private boolean tienePadecimientos;
 	
 	
-	Persona(int DNI, Fecha nacimiento, boolean esEmpleadoSalud, boolean tienePadecimientos){
+	/**IREP
+	 * DNI debe ser < 99.999.999 && >1.000.000
+	 * el año de nacimiento debe ser > 1900 y <2003
+	 * 
+	 * @param DNI
+	 * @param nacimiento
+	 * @param tienePadecimientos
+	 * @param esEmpleadoSalud
+	 */
+	
+	Persona(int DNI, Fecha nacimiento, boolean tienePadecimientos, boolean esEmpleadoSalud){
 		this.DNI = DNI;
 		this.nacimiento = nacimiento;
 		this.esEmpleadoSalud = esEmpleadoSalud;

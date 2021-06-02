@@ -17,12 +17,17 @@ public class CentroVacunacion {
 		HashMap<Integer, String> reporteVacunacion = new HashMap<>();
 		ArrayList<Persona> listaDeEspera = new ArrayList<>();
 		HashMap<Fecha, ArrayList<Turno>> turnos = new HashMap<>();
+		
+		
 	//valores auxiliares
 		
 	/*
 	 * IREP
 	 * la capacidadVacunacionDiaria debe ser un entero mayor a 0
-	 * 
+	 * cada value para cada key en reporteVacunacion solo puede ser : {Sputnik , Moderna , AstraZeneca , Sinopharm , Pfizer}
+	 * cada persona en listaDeEspera debe tener una edad>18 y en 99999999>DNI>1000000
+	 * el nombreDelCentro debe tener un largo>0 y debe tener algun caracter != " "
+	 *  
 	 */
 		
 		
@@ -85,8 +90,8 @@ public class CentroVacunacion {
 	* generar una excepción.
 	* Si la persona ya fue vacunada, también debe generar una excepción.
 	*/
-	public void inscribirPersona(int dni, Fecha nacimiento,boolean esEmpleadoSalud, boolean tienePadecimientos) {
-		Persona perso = new Persona(dni, nacimiento, esEmpleadoSalud, tienePadecimientos);
+	public void inscribirPersona(int dni, Fecha nacimiento,boolean tienePadecimientos, boolean esEmpleadoSalud) {
+		Persona perso = new Persona(dni, nacimiento, tienePadecimientos, esEmpleadoSalud);
 		
 		//dni no valido
 		if(dni > 99999999 || dni<1000000) throw new RuntimeException("DNI no valido"); 
@@ -149,7 +154,7 @@ public class CentroVacunacion {
 			if(fechaAux.compareTo(Fecha.hoy())<0) {
 				//guardo las vacunas
 				for (Turno t : turnos.get(fechaAux)) {
-					almacen.agregarVacuna(t.getVacuna());
+					almacen.agregarVacunas(t.getVacuna());
 				}
 				fechas.remove();
 			}
@@ -279,7 +284,7 @@ public class CentroVacunacion {
 	private void ordenarListaDeEspera() {
         for(int i = 0; i < listaDeEspera.size()-1; i ++) {
             for(int j = 0; j < listaDeEspera.size()-1; j ++) {
-                if(listaDeEspera.get(j).compareTo(listaDeEspera.get(j + 1)) >0) {
+                if(listaDeEspera.get(j).compareTo(listaDeEspera.get(j + 1)) <0) {
                
                 	Collections.swap(listaDeEspera, j, j+1);
                 }

@@ -83,9 +83,7 @@ public class TestCentroVacunacion {
 		assertEquals(12, centro.vacunasDisponibles());
 		assertFalse(centro.listaDeEspera().contains(dniAVacunar));
 		assertFalse(centro.reporteVacunacion().keySet().contains(dniAVacunar));
-		System.out.println(centro.turnos);
 		centro.vacunarInscripto(dniAVacunar,fecha);
-
 		assertTrue(centro.reporteVacunacion().keySet().contains(dniAVacunar));
 		
 		
