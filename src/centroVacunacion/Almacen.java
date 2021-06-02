@@ -9,7 +9,6 @@ public class Almacen {
 	
 	private HashMap <String, ArrayList<Vacuna>> vacunasDisponibles;
 	private HashMap <String, Integer> vacunasVencidas;
-	
 	Almacen(){
 		
 		//instanciamos las vacunas disponibles

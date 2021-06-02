@@ -28,21 +28,7 @@ public class Persona implements Comparable<Persona> {
 	//CompareTo
 	@Override
 	public int compareTo(Persona persona) {
-		
-//		int contEste = 0;
-//		int contOtra = 0;
-//		
-//		if(this.tienePadecimientos)contEste =2;
-//		if(persona.tienePadecimientos)contOtra =2;
-//		
-//		if (this.getEdad()>=60) contEste =3;
-//		if (persona.getEdad()>=60) contOtra =3;
-//		
-//		if (this.esEmpleadoSalud) contEste =4; 
-//		if (persona.esEmpleadoSalud) contOtra =4; 
-//		
-//		
-		
+			
 		
 		if (this.esEmpleadoSalud || persona.esEmpleadoSalud) {
 			if (this.esEmpleadoSalud && !persona.esEmpleadoSalud)
