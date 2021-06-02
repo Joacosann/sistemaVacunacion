@@ -41,9 +41,8 @@ public class Turno {
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
-		builder.append("Turno [persona=");
+		builder.append("Turno para: ");
 		builder.append(persona);
-		builder.append("]");
 		return builder.toString();
 	}
 	

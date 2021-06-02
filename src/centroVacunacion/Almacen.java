@@ -173,20 +173,28 @@ public class Almacen {
 		}         
 	}
 	
-	
+	private int cantVacunasVencidas() {
+		int cont = 0 ;
+		
+		for (String vacuna : this.vacunasVencidas.keySet()) {
+			cont += vacunasVencidas.get(vacuna);
+		}
+		
+		return cont;
+	}
 	
 	
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
-		builder.append("\n---------------------------------------------- \nAlmacen \n");
-		builder.append("\nVacunas Disponibles: \n");
+		builder.append("\n------ALMACEN------ \n");
+		builder.append("\nVacunas Disponibles: "+ vacunasDisponibles() +"\n\n");
 		for (String key : this.vacunasDisponibles.keySet()) {
 			builder.append(key + " Cantidad de vacunas disponibles : " + this.vacunasDisponibles.get(key).size() + "\n");
 		}
-		builder.append("\nVacunas Vencidas: \n");
+		builder.append("\nVacunas Vencidas: "+ cantVacunasVencidas() + "\n\n");
 		for (String key : this.vacunasVencidas.keySet()) {
-			builder.append(key + " Cantidad de vacunas vencidas : " + this.vacunasVencidas.get(key) + "\n");
+			builder.append(key +": "+ this.vacunasVencidas.get(key) + "\n");
 		}
 		
 		

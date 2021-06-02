@@ -297,19 +297,30 @@ public class CentroVacunacion {
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
-		builder.append("CentroVacunacion [nombreDelCentro=");
-		builder.append(nombreDelCentro);
-		builder.append(", capacidadVacunacionDiaria=");
+		builder.append("***********************\n");
+		builder.append("         " + nombreDelCentro + "\n");
+		builder.append("***********************\n");
+		
+		builder.append("Capacidad de vacunacion diaria: ");
 		builder.append(capacidadVacunacionDiaria);
-		builder.append(",\n lista de espera=");
-		builder.append(listaDeEspera);
-		builder.append(",\n turnos=");
-		builder.append(turnos);
-		builder.append(",\n almacen=");
+		
+		builder.append("\n------LISTA DE ESPERA------\n\n");
+		for (Persona persona : listaDeEspera) {
+			builder.append(persona + "\n");
+		}
+		
+		builder.append("\n------TURNOS------\n\n");
+		for (Fecha fecha : turnos.keySet()) {
+			builder.append("Turnos para: "+fecha + "-----------------------------------------------------------------\n");
+			for (Turno t : turnos.get(fecha)) {
+				builder.append(t + "\n");
+			}
+		}
 		builder.append(almacen);
-		builder.append("]");
 		return builder.toString();
 	}
+	
+	
 
 	
 	

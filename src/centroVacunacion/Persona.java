@@ -104,9 +104,15 @@ public class Persona implements Comparable<Persona> {
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
-		builder.append("Persona [DNI=");
-		builder.append(DNI);
-		builder.append("]");
+		builder.append("DNI : ");
+		builder.append(DNI + " | ");
+		builder.append("Edad : " + getEdad() + " | ");
+		builder.append("Trabaja en salud : ");
+		if(this.esEmpleadoSalud) builder.append("SI | ");
+		else builder.append("NO | ");
+		builder.append("Tiene padecimientos : ");
+		if(this.tienePadecimientos) builder.append("SI");
+		else builder.append("NO");
 		return builder.toString();
 	}
 

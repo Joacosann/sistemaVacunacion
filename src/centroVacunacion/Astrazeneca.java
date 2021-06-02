@@ -9,13 +9,11 @@ public class Astrazeneca extends Vacuna {
 
 	@Override
 	public boolean estaVencida() {
-		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
 	public String getNombre() {
-		// TODO Auto-generated method stub
 		return "AstraZeneca";
 	}
 
