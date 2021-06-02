@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 
-import com.sun.xml.internal.bind.v2.TODO;
 
 public class Almacen {
 	
@@ -18,7 +17,7 @@ public class Almacen {
 		this.vacunasDisponibles = new HashMap<>();
 		vacunasDisponibles.put("Pfizer", new ArrayList<>());
 		vacunasDisponibles.put("Moderna", new ArrayList<>());
-		vacunasDisponibles.put("Astrazeneca", new ArrayList<>());
+		vacunasDisponibles.put("AstraZeneca", new ArrayList<>());
 		vacunasDisponibles.put("Sputnik", new ArrayList<>());
 		vacunasDisponibles.put("Sinopharm", new ArrayList<>());
 		
@@ -27,7 +26,7 @@ public class Almacen {
 		this.vacunasVencidas = new HashMap<>();
 		vacunasVencidas.put("Pfizer", 0);
 		vacunasVencidas.put("Moderna", 0);
-		vacunasVencidas.put("Astrazeneca", 0);
+		vacunasVencidas.put("AstraZeneca", 0);
 		vacunasVencidas.put("Sputnik", 0);
 		vacunasVencidas.put("Sinopharm", 0);
 	}
@@ -60,8 +59,8 @@ public class Almacen {
 
 		if (hayVacuna("Moderna"))
 			return this.vacunasDisponibles.get("Moderna").remove(0);
-		else if (hayVacuna("Astrazeneca"))
-			return this.vacunasDisponibles.get("Astrazeneca").remove(0);
+		else if (hayVacuna("AstraZeneca"))
+			return this.vacunasDisponibles.get("AstraZeneca").remove(0);
 		else if (hayVacuna("Sinopharm")) 
 			return this.vacunasDisponibles.get("Sinopharm").remove(0);
 		else {
@@ -91,6 +90,7 @@ public class Almacen {
 	}
 	
 	public void agregarVacunas(String nombreVacuna, int cantidad , Fecha ingreso) {
+			
 			switch (nombreVacuna) {
 			case "Sputnik":
 				for (int i = 0; i < cantidad; i++) {
@@ -102,7 +102,7 @@ public class Almacen {
 					vacunasDisponibles.get(nombreVacuna).add(new Moderna(ingreso));
 				}
 				break;
-			case "Astrazeneca":
+			case "AstraZeneca":
 				for (int i = 0; i < cantidad; i++) {
 					vacunasDisponibles.get(nombreVacuna).add(new Astrazeneca());
 				}
@@ -131,7 +131,7 @@ public class Almacen {
 		case "Moderna":
 				vacunasDisponibles.get(nombreVacuna).add(vacuna);
 			break;
-		case "Astrazeneca":
+		case "AstraZeneca":
 				vacunasDisponibles.get(nombreVacuna).add(vacuna);
 			break;
 		case "Pfizer":

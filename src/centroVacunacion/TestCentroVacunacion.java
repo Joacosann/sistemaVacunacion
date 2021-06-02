@@ -83,8 +83,8 @@ public class TestCentroVacunacion {
 		assertEquals(12, centro.vacunasDisponibles());
 		assertFalse(centro.listaDeEspera().contains(dniAVacunar));
 		assertFalse(centro.reporteVacunacion().keySet().contains(dniAVacunar));
-
-		centro.vacunarInscripto(dniAVacunar,fecha);
+		
+		centro.vacunarInscripto(dniAVacunar,new Fecha(1,7,2021));
 
 		assertTrue(centro.reporteVacunacion().keySet().contains(dniAVacunar));
 		
@@ -93,9 +93,7 @@ public class TestCentroVacunacion {
 		// cumplidos  devuelvan las vacunas al STOCK y no quede gente en
 		// lista de espera.
 		Fecha.setFechaHoy(2, 7, 2021);
-
 		centro.generarTurnos(new Fecha(5,7,2021));
-		
 		assertEquals(19, centro.vacunasDisponibles());
 		assertTrue(centro.listaDeEspera().isEmpty());
 	}

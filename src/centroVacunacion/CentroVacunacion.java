@@ -1,10 +1,13 @@
 package centroVacunacion;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+
+
 public class CentroVacunacion {
 
 	//valores del constructor
@@ -48,11 +51,10 @@ public class CentroVacunacion {
 	* sumar al stock existente, tomando en cuenta las vacunas ya utilizadas.
 	*/
 	public void ingresarVacunas(String nombreVacuna, int cantidad, Fecha fechaIngreso) {
-		//"Pfizer" , "Moderna" , "Sinopharm" , "Astrazeneca" , "Sputnik"
 		if(!nombreVacuna.equals("Pfizer") && 
 				!nombreVacuna.equals("Moderna") &&
 				!nombreVacuna.equals("Sinopharm") &&
-				!nombreVacuna.equals("Astrazeneca") &&
+				!nombreVacuna.equals("AstraZeneca") &&
 				!nombreVacuna.equals("Sputnik")) throw new RuntimeException("La vacuna no es valida");
 	
 		if(cantidad <=0) throw new RuntimeException("No es posible ingresar menos de una vacuna");
@@ -83,11 +85,11 @@ public class CentroVacunacion {
 	* generar una excepción.
 	* Si la persona ya fue vacunada, también debe generar una excepción.
 	*/
-	public void inscribirPersona(int dni, Fecha nacimiento,boolean tienePadecimientos, boolean esEmpleadoSalud) {
+	public void inscribirPersona(int dni, Fecha nacimiento,boolean esEmpleadoSalud, boolean tienePadecimientos) {
 		Persona perso = new Persona(dni, nacimiento, esEmpleadoSalud, tienePadecimientos);
 		
 		//dni no valido
-		if(dni > 99999999 || dni<1000000) throw new RuntimeException("DNI no valido"); // TODO preguntar profe
+		if(dni > 99999999 || dni<1000000) throw new RuntimeException("DNI no valido"); 
 		//si es mayor de 18
 		if(perso.getEdad() <18) throw new RuntimeException("La persona debe ser mayor de 18 años");
 		//si no fue vacunada
@@ -140,17 +142,18 @@ public class CentroVacunacion {
 		/********************primera parte*************************/
 		
 		//recorro todas las fechas
-		for (Fecha fecha : this.turnos.keySet()) {
+		Iterator<Fecha> fechas = turnos.keySet().iterator();
+		while(fechas.hasNext()) {
+			Fecha fechaAux = fechas.next();
 			//si la fecha esta vencida
-			if(fecha.compareTo(Fecha.hoy())<0) {
-				//itero sobre el arreglo de turnos
-				Iterator<Turno> it = this.turnos.get(fecha).iterator();
-				while(it.hasNext()) {
-						//se vuelve a amacenar la vacuna 
-						almacen.agregarVacuna(it.next().getVacuna());
+			if(fechaAux.compareTo(Fecha.hoy())<0) {
+				System.out.println(turnos.get(fechaAux));
+				//guardo las vacunas
+				for (Turno t : turnos.get(fechaAux)) {
+					almacen.agregarVacuna(t.getVacuna());
 				}
+				fechas.remove();
 			}
-			this.turnos.remove(fecha);
 		}
 		/********************segunda parte*************************/
 		
@@ -161,40 +164,42 @@ public class CentroVacunacion {
 		//si no hay turnos con esa fecha la define
 		if(!this.turnos.keySet().contains(fechaInicial)) {
 				this.turnos.put(fechaInicial, new ArrayList<Turno>());
-			}
-		
-		for (Persona persona : listaDeEspera) {
-			//si hay vacunas disponibles
-			
-			if(almacen.vacunasDisponibles()>0) {
-				
-				Vacuna aux = almacen.dameVacuna(persona.getEdad());
-				
-				if (aux != null) {
-					if(this.turnos.get(fechaInicial).size()<capacidadVacunacionDiaria) {
-						this.turnos.get(fechaInicial).add(new Turno(persona,aux , fechaInicial));
-						listaDeEspera.remove(persona);
-					}
-					else {
-						fechaInicial.avanzarUnDia();
-						this.turnos.put(fechaInicial, new ArrayList<Turno>());
-						this.turnos.get(fechaInicial).add(new Turno(persona, aux, fechaInicial));
-						listaDeEspera.remove(persona);
-					}
-				}
-			}
-			//ya no hay mas vacunas
-			break;
 		}
 		
+		Iterator<Persona> it = listaDeEspera.iterator();
+		Fecha auxFecha = new Fecha(fechaInicial.dia(),fechaInicial.mes(),fechaInicial.anio());
+		while(it.hasNext()) {
+			
+			//si hay vacunas disponibles
+			Persona perso = it.next();
+			if(almacen.vacunasDisponibles()>0) {
+				Vacuna aux = almacen.dameVacuna(perso.getEdad());
+				
+				if (aux != null) {	
+					
+					if(this.turnos.get(auxFecha).size()<capacidadVacunacionDiaria) {
+						this.turnos.get(auxFecha).add(new Turno(perso,aux , auxFecha));
+						it.remove();
+					}
+					else {
+						auxFecha.avanzarUnDia();
+						this.turnos.put(new Fecha(auxFecha.dia(),auxFecha.mes(),auxFecha.anio()), new ArrayList<Turno>());
+						this.turnos.get(auxFecha).add(new Turno(perso, aux, auxFecha));
+						it.remove();
+					}
+				}
+			
+			}
+			//ya no hay mas vacunas
+			else
+				break;
+			
+		}
 		
 		
 	} //fin del metodo
 	
-	private boolean fueVacunada(Persona perso) { //TODO ver si se usa 
-		return this.reporteVacunacion.keySet().contains(perso.getDNI());
-	}
-	
+
 	
 	
 	/**
@@ -204,7 +209,13 @@ public class CentroVacunacion {
 	* La cantidad de turnos no puede exceder la capacidad por día de la ungs.
 	*/
 	public List<Integer> turnosConFecha(Fecha fecha) {
-		return null;
+		ArrayList<Integer> aux =new ArrayList<Integer>();
+		if(!this.turnos.keySet().contains(fecha)) return aux;
+		
+		for (Turno turno : turnos.get(fecha)) {
+			aux.add(turno.dameDni());
+		}
+		return aux;
 	}
 	
 	
@@ -219,9 +230,26 @@ public class CentroVacunacion {
 	* - Si no está inscripto o no tiene turno ese día, se genera una Excepcion.
 	*/
 	public void vacunarInscripto(int dni, Fecha fechaVacunacion) {
+
+		if (turnosConFecha(fechaVacunacion).contains(dni)) {
+
+			Iterator<Turno> it = turnos.get(fechaVacunacion).iterator();
+			while (it.hasNext()) {
+				Turno aux = it.next();
+
+				if (aux.dameDni() == dni) {
+
+					reporteVacunacion.put(aux.dameDni(), aux.getVacuna().getNombre());
+					it.remove();
+				}
+
+			}
+		}
+		else {
+			throw new RuntimeException("esa persona no posee turno para esa fecha");
+		}
+
 	}
-	
-	
 	
 	
 	
@@ -249,9 +277,17 @@ public class CentroVacunacion {
 		return almacen.reporteVacunasVencidas();
 	}
 	
-	public void ordenarListaDeEspera() {
-		
-	}
+	private void ordenarListaDeEspera() {
+        for(int i = 0; i < listaDeEspera.size()-1; i ++) {
+            for(int j = 0; j < listaDeEspera.size()-1; j ++) {
+                if(listaDeEspera.get(j).compareTo(listaDeEspera.get(j + 1)) <0) {
+              
+                	Collections.swap(listaDeEspera, j, j+1);
+                }
+            }
+        }
+    }
+	
 	
 	
 	@Override
@@ -261,31 +297,16 @@ public class CentroVacunacion {
 		builder.append(nombreDelCentro);
 		builder.append(", capacidadVacunacionDiaria=");
 		builder.append(capacidadVacunacionDiaria);
-		builder.append(", almacen=");
-		builder.append(almacen);
-		builder.append(", lista de espera=");
+		builder.append(",\n lista de espera=");
 		builder.append(listaDeEspera);
+		builder.append(",\n turnos=");
+		builder.append(turnos);
+		builder.append(",\n almacen=");
+		builder.append(almacen);
 		builder.append("]");
 		return builder.toString();
 	}
 
-
-
-	
-	
-	public static void main(String[] args) {
-		CentroVacunacion ungs = new CentroVacunacion("UNGS", 10);
-		ungs.ingresarVacunas("Moderna", 20, Fecha.hoy());
-		ungs.ingresarVacunas("Pfizer", 15, Fecha.hoy());
-		ungs.inscribirPersona(65196953, new Fecha(14,06,1999), false, false);
-		ungs.inscribirPersona(68549616, new Fecha(14,06,1999), false, false);
-		System.out.println(ungs);
-		System.out.println(ungs.vacunasDisponibles());
-		System.out.println(ungs.vacunasDisponibles("Pfizer"));
-		System.out.println(ungs.listaDeEspera());
-
-		
-	}
 	
 	
 }

@@ -16,7 +16,7 @@ public class Astrazeneca extends Vacuna {
 	@Override
 	public String getNombre() {
 		// TODO Auto-generated method stub
-		return "Astrazeneca";
+		return "AstraZeneca";
 	}
 
 }

@@ -28,7 +28,22 @@ public class Persona implements Comparable<Persona> {
 	//CompareTo
 	@Override
 	public int compareTo(Persona persona) {
-
+		
+//		int contEste = 0;
+//		int contOtra = 0;
+//		
+//		if(this.tienePadecimientos)contEste =2;
+//		if(persona.tienePadecimientos)contOtra =2;
+//		
+//		if (this.getEdad()>=60) contEste =3;
+//		if (persona.getEdad()>=60) contOtra =3;
+//		
+//		if (this.esEmpleadoSalud) contEste =4; 
+//		if (persona.esEmpleadoSalud) contOtra =4; 
+//		
+//		
+		
+		
 		if (this.esEmpleadoSalud || persona.esEmpleadoSalud) {
 			if (this.esEmpleadoSalud && !persona.esEmpleadoSalud)
 				return 1;
@@ -51,35 +66,55 @@ public class Persona implements Comparable<Persona> {
 				return -1;
 		}
 		return 0;
-		
-		
-		
-		
-			
-			
 			
 	}
-
+	
+	
 	//getter
 	public int getDNI() {
 		return DNI;
 	}
 
-
+	
 
 
 	
 	
-	public static void main(String[] args) {
-		Persona pepe = new Persona(42948062, new Fecha(31, 5, 2000), true, true);
-		Persona juan = new Persona(42948062, new Fecha(31, 5, 1930), true, true);
-		System.out.println(pepe.getEdad());
-		System.out.println(juan.getEdad());
-		System.out.println(pepe.compareTo(juan));
-		
-		
-		
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + DNI;
+		return result;
 	}
+
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Persona other = (Persona) obj;
+		if (DNI != other.DNI)
+			return false;
+		return true;
+	}
+
+
+	
+	@Override
+	public String toString() {
+		StringBuilder builder = new StringBuilder();
+		builder.append("Persona [DNI=");
+		builder.append(DNI);
+		builder.append("]");
+		return builder.toString();
+	}
+
+
 
 
 	

@@ -12,16 +12,9 @@ public class Turno {
 		this.fecha = f;
 	}
 	
-	public boolean esTurnoVencido() {
-		if (Fecha.hoy().compareTo(this.fecha) > 0) {
-			return true;
-		} else {
-			return false;
-		}
-	}
 
-	public String dameDni() {
-		return "" + this.persona.getDNI();
+	public int dameDni() {
+		return this.persona.getDNI();
 	}
 
 	// Setters y Getters
@@ -36,5 +29,16 @@ public class Turno {
 	public Fecha getFecha() {
 		return fecha;
 	}
+
+	@Override
+	public String toString() {
+		StringBuilder builder = new StringBuilder();
+		builder.append("Turno [persona=");
+		builder.append(persona);
+		builder.append("]");
+		return builder.toString();
+	}
+	
+	
 
 }
