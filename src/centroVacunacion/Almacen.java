@@ -13,7 +13,7 @@ public class Almacen {
 	/*
 	 * IREP
 	 * el value de todas las keys en vacunasVencidas no puede ser < 0
-	 * las keys en los diccionarios vacunasDisponibles y vacunasDisponibles solo pueden ser : 
+	 * las keys en los diccionarios vacunasDisponibles y vacunasVencidas solo pueden ser : 
 	 *  {Sputnik , Moderna , AstraZeneca , Sinopharm , Pfizer}
 	 */
 	
