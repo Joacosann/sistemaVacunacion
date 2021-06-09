@@ -9,7 +9,7 @@ public class Turno {
 	/**IREP
 	 * si la edad de persona es <60 la vacuna no puede ser : {Pfizer , Sputnik}
 	 * 
-	 * 
+	 *  
 	 * @param p
 	 * @param v
 	 * @param f
@@ -43,6 +43,8 @@ public class Turno {
 		StringBuilder builder = new StringBuilder();
 		builder.append("Turno para: ");
 		builder.append(persona);
+		builder.append(" | Vacuna a aplicar: ");
+		builder.append(vacuna.getNombre());
 		return builder.toString();
 	}
 	
