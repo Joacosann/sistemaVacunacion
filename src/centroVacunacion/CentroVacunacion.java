@@ -14,9 +14,9 @@ public class CentroVacunacion {
 		private String nombreDelCentro;
 		private int capacidadVacunacionDiaria;
 		private Almacen almacen;
-		HashMap<Integer, String> reporteVacunacion = new HashMap<>();
-		ArrayList<Persona> listaDeEspera = new ArrayList<>();
-		HashMap<Fecha, ArrayList<Turno>> turnos = new HashMap<>();
+		private HashMap<Integer, String> reporteVacunacion = new HashMap<>();
+		private ArrayList<Persona> listaDeEspera = new ArrayList<>();
+		private HashMap<Fecha, ArrayList<Turno>> turnos = new HashMap<>();
 		
 		
 	//valores auxiliares
